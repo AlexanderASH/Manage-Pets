@@ -24,6 +24,6 @@ export default class Server {
     }
 
     private setupRoutes() {
-        this.application.use('/api/pets', petRoute);
+        this.application.use('/api/v1/pets', petRoute);
     }
 }

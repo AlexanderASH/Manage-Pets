@@ -36,7 +36,7 @@ const create = async (req: Request, res: Response) => {
 
         await pet.save();
 
-        res.send(pet);
+        res.status(201).send(pet);
     } catch (error) {
         res.status(500).json({
             message: error
@@ -50,7 +50,7 @@ const update = async (req: Request, res: Response) => {
         const pet = await Pet.findOne(id);
 
         if (!pet) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: 'Pet no found'
             })
         }
@@ -67,9 +67,7 @@ const update = async (req: Request, res: Response) => {
             }
         });
 
-        res.status(200).json({
-            message: 'Updated pet'
-        });
+        res.status(204).json();
         
     } catch (error) {
         res.status(500).json({
@@ -84,16 +82,14 @@ const remove = async (req: Request, res: Response) => {
         const pet = await Pet.findOne(id);
 
         if (!pet) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: 'Pet no found'
             })
         }
 
         await Pet.delete(id);
 
-        res.status(200).json({
-            message: 'Deleted pet'
-        });
+        res.status(204).json();
     } catch (error) {
         res.status(500).json({
             message: error
