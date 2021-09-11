@@ -1,7 +1,9 @@
+import { setupDB } from "./Database/config";
 import Server from "./Server/app";
 
-function init() {
+async function init() {
     try {
+        await setupDB();
         new Server();
     } catch (error) {
         console.log(error);
