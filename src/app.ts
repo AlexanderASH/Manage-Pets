@@ -1,2 +1,11 @@
+import Server from "./Server/app";
 
-console.log("Hello Word!!!");
+function init() {
+    try {
+        new Server();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+init();
