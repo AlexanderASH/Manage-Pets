@@ -14,7 +14,7 @@ const read = async (req: Request, res: Response) => {
             relations: ['type'],
             ...search.buildSearch(),
             take: limit,
-            skip: page
+            skip: page * limit
         });
 
         res.json({

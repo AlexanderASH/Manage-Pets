@@ -45,7 +45,7 @@ export default class PetSearch extends Search {
         }
 
         Object.entries(this.query).map((value) => {
-            if (value[0] != 'sort' && value[0] != 'order') {
+            if (value[0] != 'sort' && value[0] != 'order' && value[0] != 'page' && value[0] != 'limit') {
                 option.where = {
                     ...option.where,
                     [`${value[0]}`]: value[1]
