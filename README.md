@@ -11,10 +11,23 @@
 > Note: If you have the error of ts-node command not recognized install the package of the next manner "npm i -g ts-node"
 
 ## **Defined Endpoints**
-* __GET    api/v1/pets__
-* __POST   api/v1/pets__
-* __PUT    api/v1/pets/:id__
-* __DELETE api/v1/pets/:id__
+* __GET__ api/v1/pets
+* __POST__ api/v1/pets
+* __PUT__ api/v1/pets/:id
+* __DELETE__ api/v1/pets/:id
+
+## **Example of JSON for creating and updating**
+```
+{
+    "name": "Pcua",
+    "description": "Pet happy",
+    "color": "black",
+    "size": "small",
+    "image": "www.aws.ol/pcua",
+    "gender": "male",
+    "typeId": 1
+}
+```
 
 ## **Description**
 For the part of the endpoint search I used query params which are:
