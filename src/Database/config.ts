@@ -4,7 +4,7 @@ const options: ConnectionOptions = {
     type: 'sqlite',
     database: `${__dirname}/data/pets.sqlite`,
     entities: [`${__dirname}/entities/*.ts`],
-    logging: true,
+    logging: false,
     synchronize: true
 };
 

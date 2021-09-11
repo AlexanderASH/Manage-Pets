@@ -3,4 +3,6 @@
 
 /dist
 
+/src/Database/data/pets.sqlite
+
 .env

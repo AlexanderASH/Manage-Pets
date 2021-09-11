@@ -1,0 +1,109 @@
+import { Request, Response } from 'express';
+import { Pet } from '../../../Database/entities/Pet';
+
+const read = async (req: Request, res: Response) => {
+    try {
+        const pets = await Pet.find({
+            relations: ['type'],
+            order: {
+                id: "ASC"
+            }
+        });
+
+        res.send(pets);
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
+    }
+}
+
+const create = async (req: Request, res: Response) => {
+    try {
+        const { name, description, color, size, image, gender, typeId } = req.body;
+
+        const pet = Pet.create({
+            name,
+            description,
+            color,
+            size,
+            image,
+            gender,
+            type: {
+                id: typeId
+            }
+        });
+
+        await pet.save();
+
+        res.send(pet);
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
+    }
+}
+const update = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { name, description, color, size, image, gender, typeId } = req.body
+        const pet = await Pet.findOne(id);
+
+        if (!pet) {
+            return res.status(400).json({
+                message: 'Pet no found'
+            })
+        }
+
+        await Pet.update(id, {
+            name,
+            description,
+            color,
+            size,
+            image,
+            gender,
+            type: {
+                id: typeId
+            }
+        });
+
+        res.status(200).json({
+            message: 'Updated pet'
+        });
+        
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
+    }
+}
+const remove = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+
+        const pet = await Pet.findOne(id);
+
+        if (!pet) {
+            return res.status(400).json({
+                message: 'Pet no found'
+            })
+        }
+
+        await Pet.delete(id);
+
+        res.status(200).json({
+            message: 'Deleted pet'
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
+    }
+}
+
+export {
+    read,
+    create,
+    update,
+    remove
+}
