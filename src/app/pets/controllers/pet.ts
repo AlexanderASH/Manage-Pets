@@ -1,17 +1,29 @@
 import { Request, Response } from 'express';
 import { Pet } from '../../../Database/entities/Pet';
+import PetSearch from '../../../utils/search/Pet';
+import { Search } from '../../../utils/search/Search';
 
 const read = async (req: Request, res: Response) => {
     try {
-        const pets = await Pet.find({
+        const page: number = +req.query.page! || 0;
+        const limit: number = +req.query.limit! || 50;
+
+        let search: Search = new PetSearch(req.query);
+
+        const [pets, count] = await Pet.findAndCount({
             relations: ['type'],
-            order: {
-                id: "ASC"
-            }
+            ...search.buildSearch(),
+            take: limit,
+            skip: page
         });
 
-        res.send(pets);
+        res.json({
+            pets,
+            count
+        });
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({
             message: error
         });
