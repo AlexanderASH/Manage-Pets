@@ -3,8 +3,8 @@
 ## **Installation**
 1. Clone the project.
 2. Open the project in your favorite code editor.
-3. Execute in the terminal the command "npm i" for installs the dependecies.
-4. Execute npm run seeder, wait it until finalized.
+3. Execute in the terminal the command **npm i** for installs the dependecies.
+4. Execute **npm run seed**, wait it until finalized.
 6. Create a file .env and copy the defined variables in the file .env.copy and fill it.
 5. Finally execute the command npm run dev.
 
