@@ -1,18 +1,15 @@
 import { Type } from '../entities/Type';
 
 export const seedType = async () => {
-    const types: string[] = [
-        "dog",
-        "cat",
-        "bird",
-        "rodent"
-    ];
+    const dog = Type.create({name: "dog"});
+    await dog.save();
 
-    await Promise.all(types.map(async (name: string) => {
-        const type = Type.create({
-            name
-        });
+    const cat = Type.create({name: "cat"});
+    await cat.save();
 
-        await type.save();
-    }));
+    const bird = Type.create({name: "bird"});
+    await bird.save();
+
+    const rodent = Type.create({name: "rodent"});
+    await rodent.save();
 }
